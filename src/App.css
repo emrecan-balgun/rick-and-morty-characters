@@ -6,7 +6,7 @@
 }
 
 .header {
-  background-image: url("https://im4.ezgif.com/tmp/ezgif-4-a564b22a09.jpg");
+  background-image: url("./images/header.jpg");
   background-size: cover;
   background-position: 50%;
   height: 50vh;
@@ -21,7 +21,7 @@
 }
 
 .input__size {
-  min-width: 568px;
+  min-width: 800px;
 }
 
 .search:hover {
