@@ -11,10 +11,19 @@
   background-position: 50%;
   height: 50vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .header__title {
   color: #fff;
+}
+
+.input__size {
+  min-width: 568px;
+}
+
+.search:hover {
+  cursor: pointer;
 }
