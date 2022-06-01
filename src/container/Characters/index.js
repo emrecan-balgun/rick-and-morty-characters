@@ -19,7 +19,10 @@ function Characters() {
         {
             data.characters.results.map((character) => (
               <div key={character.id}>
+                <img src={character.image}/>
+                <p>{character.species}</p>
                 <p>{character.name}</p>
+                <p>{character.location.name}</p>
               </div>
             ))
         }
