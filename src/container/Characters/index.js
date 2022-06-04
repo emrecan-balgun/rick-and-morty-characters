@@ -2,11 +2,20 @@ import { GET_ALL_CHARACTERS } from './queries';
 import { useQuery } from "@apollo/client";
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
-import { Container, Row, Col, Card  } from 'react-bootstrap';
+import { Container, Row, Col, Card, Pagination  } from 'react-bootstrap';
+import styles from './styles.module.css'
+import { useState } from 'react';
+import ReactPaginate from 'react-paginate';
 
 
 function Characters() {
-  const { loading, error, data } = useQuery(GET_ALL_CHARACTERS);
+  const [pageNumber, SetPageNumber] = useState(0);
+
+  const { loading, error, data } = useQuery(GET_ALL_CHARACTERS, {
+    variables: {
+        page: pageNumber,
+    },
+  });
 
   const options = [
     '16 hits per page', 
@@ -18,12 +27,16 @@ function Characters() {
     return <Error message={error.message} />;
   }
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
   const handleChange = (event) => {
       console.log(event.target.value)
+  }
+  
+  const changePage = ({ selected }) => {
+      SetPageNumber(selected)
   }
 
   return (
@@ -39,7 +52,7 @@ function Characters() {
           </div>
         </Col>
         <hr className="my-4" />
-          {
+          {/* {
                 data.characters.results.map((character) => (
                   <Col className="col-3" key={character.id}>
                     <Card className="border-0">
@@ -52,10 +65,22 @@ function Characters() {
                     </Card>
                   </Col>
                 ))
-            }
+            } */}
+        <Col>
+          <ReactPaginate
+                  nextLabel=">"
+                  previousLabel="<"
+                  pageCount={43}
+                  containerClassName={styles.paginate}
+                  activeClassName={styles.paginationActive}
+                  onPageChange={changePage}
+              >
+            </ReactPaginate>
+        </Col>
       </Row>
     </Container>
   )
 }
+
 
 export default Characters
