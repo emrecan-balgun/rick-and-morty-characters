@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&family=Montserrat:wght@100;400;500;800&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&family=Montserrat:wght@100;400;500;600;800&family=Roboto&display=swap');
 
 .App {
   font-family: 'Roboto', sans-serif;
@@ -26,4 +26,45 @@
 
 .search:hover {
   cursor: pointer;
+}
+
+.deneme {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.zeroPadding {
+  padding: 0 !important;
+}
+
+.characterCategory {
+  margin-top: 10px;
+  color: #21243d;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 8px;
+  opacity: .7;
+  text-transform: uppercase;
+}
+
+.characterName {
+  margin: 0 !important;
+  box-sizing: border-box;
+  font-size: .9rem;
+}
+
+.characterLocation {
+  box-sizing: border-box;
+  font-size: .9rem;
+}
+
+.input-group {
+  justify-content: flex-end;
+}
+
+.input-group .btn {
+  font-size: .9rem;
 }
