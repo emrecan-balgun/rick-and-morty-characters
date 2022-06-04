@@ -2,10 +2,17 @@ import { GET_ALL_CHARACTERS } from './queries';
 import { useQuery } from "@apollo/client";
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
-import { Container, Row, Col, Card, InputGroup, FormControl, DropdownButton, Dropdown  } from 'react-bootstrap';
+import { Container, Row, Col, Card  } from 'react-bootstrap';
+
 
 function Characters() {
   const { loading, error, data } = useQuery(GET_ALL_CHARACTERS);
+
+  const options = [
+    '16 hits per page', 
+    '32 hits per page', 
+    '64 hits per page'
+  ];
 
   if (error) {
     return <Error message={error.message} />;
@@ -15,21 +22,22 @@ function Characters() {
     return <Loading />;
   }
 
+  const handleChange = (event) => {
+      console.log(event.target.value)
+  }
+
   return (
     <Container>
       <Row>
-        {/* <InputGroup className="mb-3">
-          <DropdownButton
-            variant="outline-none"
-            title="16 hits per page"
-            id="input-group-dropdown-2"
-            align="end"
-          >
-            <Dropdown.Item active href="#">16 hits per page</Dropdown.Item>
-            <Dropdown.Item href="#">32 hits per page</Dropdown.Item>
-            <Dropdown.Item href="#">64 hits per page</Dropdown.Item>
-          </DropdownButton>
-        </InputGroup> */}
+        <Col className="perPageFilter">
+          <div className="custom-select">
+            <select className="select" defaultValue={options[0]} onChange={(e) => handleChange(e)}>
+              <option className="option" value={options[0]}>{options[0]}</option>
+              <option className="option" value={options[1]}>{options[1]}</option>
+              <option className="option" value={options[2]}>{options[2]}</option>
+            </select>
+          </div>
+        </Col>
         <hr className="my-4" />
           {
                 data.characters.results.map((character) => (
