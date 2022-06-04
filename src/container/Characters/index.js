@@ -4,7 +4,7 @@ import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import { Container, Row, Col, Card, Pagination  } from 'react-bootstrap';
 import styles from './styles.module.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 
 
@@ -27,9 +27,9 @@ function Characters() {
     return <Error message={error.message} />;
   }
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
+  if (loading) {
+    return <Loading />;
+  }
 
   const handleChange = (event) => {
       console.log(event.target.value)
@@ -52,7 +52,7 @@ function Characters() {
           </div>
         </Col>
         <hr className="my-4" />
-          {/* {
+          {
                 data.characters.results.map((character) => (
                   <Col className="col-3" key={character.id}>
                     <Card className="border-0">
@@ -65,17 +65,17 @@ function Characters() {
                     </Card>
                   </Col>
                 ))
-            } */}
-        <Col>
-          <ReactPaginate
-                  nextLabel=">"
-                  previousLabel="<"
-                  pageCount={43}
-                  containerClassName={styles.paginate}
-                  activeClassName={styles.paginationActive}
-                  onPageChange={changePage}
-              >
-            </ReactPaginate>
+            }
+        <Col className="pagination">
+            <ReactPaginate
+                    nextLabel=">"
+                    previousLabel="<"
+                    pageCount={43}
+                    containerClassName={styles.paginate}
+                    activeClassName={styles.paginationActive}
+                    onPageChange={changePage}
+                >
+              </ReactPaginate>
         </Col>
       </Row>
     </Container>
