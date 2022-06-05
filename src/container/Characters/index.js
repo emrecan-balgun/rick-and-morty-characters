@@ -2,21 +2,38 @@ import { GET_ALL_CHARACTERS } from './queries';
 import { useQuery } from "@apollo/client";
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
-import { Container, Row, Col, Card, Pagination  } from 'react-bootstrap';
-import styles from './styles.module.css'
+import { Container, Row, Col, Card, Pagination } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import ReactPaginate from 'react-paginate';
-
 
 function Characters() {
   const [pageNumber, SetPageNumber] = useState(0);
+  const [active, setActive] = useState(1);
+  const [veri, setVeri] = useState();
+  const [load, setLoad] = useState();
+  const [err, setErr] = useState();
 
-  const { loading, error, data } = useQuery(GET_ALL_CHARACTERS, {
-    variables: {
-        page: pageNumber,
-    },
-  });
+    const { loading, error, data } = useQuery(GET_ALL_CHARACTERS, {
+      variables: {
+          page: pageNumber,
+      },
+    });
 
+  // function GetData() {
+  //   const { loading, error, data } = useQuery(GET_ALL_CHARACTERS, {
+  //     variables: {
+  //         page: pageNumber,
+  //     },
+  //   });
+  //   setVeri(data);
+  //   setLoad(loading);
+  //   setErr(error);
+  // }
+
+  // useEffect(() => {
+  //   GetData();
+  // }, [active])
+
+ 
   const options = [
     '16 hits per page', 
     '32 hits per page', 
@@ -34,9 +51,19 @@ function Characters() {
   const handleChange = (event) => {
       console.log(event.target.value)
   }
-  
-  const changePage = ({ selected }) => {
-      SetPageNumber(selected)
+
+  const handlePageClick = (number) => {
+    console.log(number);
+    setActive(number);
+  };
+
+  let items = [];
+  for (let number = 1; number <= 43; number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === active} onClick={(e) => handlePageClick(number)}>
+        {number}
+      </Pagination.Item>,
+    );
   }
 
   return (
@@ -66,16 +93,8 @@ function Characters() {
                   </Col>
                 ))
             }
-        <Col className="pagination">
-            <ReactPaginate
-                    nextLabel=">"
-                    previousLabel="<"
-                    pageCount={43}
-                    containerClassName={styles.paginate}
-                    activeClassName={styles.paginationActive}
-                    onPageChange={changePage}
-                >
-              </ReactPaginate>
+        <Col className="col-12 pagination">
+            <Pagination>{items}</Pagination>
         </Col>
       </Row>
     </Container>
@@ -84,3 +103,4 @@ function Characters() {
 
 
 export default Characters
+
