@@ -68,7 +68,7 @@ function Characters() {
           {
                 data.characters.results.slice(0,perPage).map((character) => (
                   <Col className="col-3" key={character.id}>
-                    <Card className="border-0">
+                    <Card className="border-0 p-2">
                       <Card.Img variant="top" src={character.image}/>
                       <Card.Body className="text-start zeroPadding ">
                         <Card.Text className="characterCategory">{character.species}</Card.Text>
@@ -79,7 +79,7 @@ function Characters() {
                   </Col>
                 ))
             }
-        <Col className="col-12">
+        <Col className="col-12 mt-4 mb-4">
             <Pagination defaultActivePage={1} activePage={active} totalPages={42} onPageChange={(event, data) => handlePageClick(data.activePage)}/>
         </Col>
       </Row>

@@ -40,9 +40,9 @@
 }
 
 .characterCategory {
-  margin-top: 10px;
+  margin-top: 10px !important;
   color: #21243d;
-  font-size: 12px;
+  font-size: 12px !important;
   font-weight: 600;
   line-height: 1;
   margin-bottom: 8px;
@@ -53,12 +53,12 @@
 .characterName {
   margin: 0 !important;
   box-sizing: border-box;
-  font-size: .9rem;
+  font-size: .9rem !important;
 }
 
 .characterLocation {
   box-sizing: border-box;
-  font-size: .9rem;
+  font-size: .9rem !important;
 }
 
 .perPageFilter {
@@ -98,10 +98,4 @@
   white-space: nowrap;
   min-height: 1.2em;
   padding: 0px 2px 1px;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
