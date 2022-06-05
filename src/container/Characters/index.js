@@ -1,9 +1,12 @@
-import { GET_ALL_CHARACTERS } from './queries';
-import { useQuery } from "@apollo/client";
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
-import { Container, Row, Col, Card, Pagination } from 'react-bootstrap';
+import 'semantic-ui-css/semantic.min.css'
+
+import { GET_ALL_CHARACTERS } from './queries';
+import { useQuery } from "@apollo/client";
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+import { Pagination } from 'semantic-ui-react'
 
 function Characters() {
   const [pageNumber, setPageNumber] = useState(1);
@@ -48,15 +51,6 @@ function Characters() {
     setPageNumber(number);
   };
 
-  let items = [];
-  for (let number = 1; number <= 42; number++) {
-    items.push(
-      <Pagination.Item key={number} active={number === active} onClick={(e) => handlePageClick(number)}>
-        {number}
-      </Pagination.Item>
-    );
-  }
-
   return (
     <Container>
       <Row>
@@ -85,8 +79,8 @@ function Characters() {
                   </Col>
                 ))
             }
-        <Col className="col-12 pagination">
-            <Pagination>{items}</Pagination>
+        <Col className="col-12">
+            <Pagination defaultActivePage={1} activePage={active} totalPages={42} onPageChange={(event, data) => handlePageClick(data.activePage)}/>
         </Col>
       </Row>
     </Container>
