@@ -6,33 +6,21 @@ import { Container, Row, Col, Card, Pagination } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 
 function Characters() {
-  const [pageNumber, SetPageNumber] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
   const [active, setActive] = useState(1);
-  const [veri, setVeri] = useState();
-  const [load, setLoad] = useState();
-  const [err, setErr] = useState();
+  // const [state, setState] = useState([]);
 
-    const { loading, error, data } = useQuery(GET_ALL_CHARACTERS, {
-      variables: {
-          page: pageNumber,
-      },
-    });
+  const { loading, error, data } = useQuery(GET_ALL_CHARACTERS, {
+    variables: {
+        page: pageNumber,
+    },
+  });
 
-  // function GetData() {
-  //   const { loading, error, data } = useQuery(GET_ALL_CHARACTERS, {
-  //     variables: {
-  //         page: pageNumber,
-  //     },
-  //   });
-  //   setVeri(data);
-  //   setLoad(loading);
-  //   setErr(error);
-  // }
-
-  // useEffect(() => {
-  //   GetData();
-  // }, [active])
-
+  useEffect(() => {
+    // if (data) {
+    //   setState(data)
+    // }
+  }, [pageNumber]);
  
   const options = [
     '16 hits per page', 
@@ -55,10 +43,12 @@ function Characters() {
   const handlePageClick = (number) => {
     console.log(number);
     setActive(number);
+    setPageNumber(number);
+    // console.log("deneme: " + Math.ceil(data.characters.results.length / 8));
   };
 
   let items = [];
-  for (let number = 1; number <= 43; number++) {
+  for (let number = 1; number <= 42; number++) {
     items.push(
       <Pagination.Item key={number} active={number === active} onClick={(e) => handlePageClick(number)}>
         {number}
