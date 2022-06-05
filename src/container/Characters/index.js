@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 
 function Characters() {
   const [pageNumber, setPageNumber] = useState(1);
+  const [perPage, setPerPage] = useState(8);
   const [active, setActive] = useState(1);
   // const [state, setState] = useState([]);
 
@@ -23,9 +24,10 @@ function Characters() {
   }, [pageNumber]);
  
   const options = [
-    '16 hits per page', 
-    '32 hits per page', 
-    '64 hits per page'
+    '8 hits per page', 
+    '12 hits per page',
+    '16 hits per page',
+    '20 hits per page',
   ];
 
   if (error) {
@@ -36,15 +38,14 @@ function Characters() {
     return <Loading />;
   }
 
-  const handleChange = (event) => {
-      console.log(event.target.value)
+  const handlePerPage = (event) => {
+    setPerPage(event.target.value);
   }
 
   const handlePageClick = (number) => {
     console.log(number);
     setActive(number);
     setPageNumber(number);
-    // console.log("deneme: " + Math.ceil(data.characters.results.length / 8));
   };
 
   let items = [];
@@ -52,7 +53,7 @@ function Characters() {
     items.push(
       <Pagination.Item key={number} active={number === active} onClick={(e) => handlePageClick(number)}>
         {number}
-      </Pagination.Item>,
+      </Pagination.Item>
     );
   }
 
@@ -61,16 +62,17 @@ function Characters() {
       <Row>
         <Col className="perPageFilter">
           <div className="custom-select">
-            <select className="select" defaultValue={options[0]} onChange={(e) => handleChange(e)}>
-              <option className="option" value={options[0]}>{options[0]}</option>
-              <option className="option" value={options[1]}>{options[1]}</option>
-              <option className="option" value={options[2]}>{options[2]}</option>
+            <select className="select" value={perPage} onChange={(e) => handlePerPage(e)}>
+              <option className="option" value={options[0].substring(0,1)}>{options[0]}</option>
+              <option className="option" value={options[1].substring(0,2)}>{options[1]}</option>
+              <option className="option" value={options[2].substring(0,2)}>{options[2]}</option>
+              <option className="option" value={options[3].substring(0,2)}>{options[3]}</option>
             </select>
           </div>
         </Col>
         <hr className="my-4" />
           {
-                data.characters.results.map((character) => (
+                data.characters.results.slice(0,perPage).map((character) => (
                   <Col className="col-3" key={character.id}>
                     <Card className="border-0">
                       <Card.Img variant="top" src={character.image}/>
