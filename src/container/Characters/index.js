@@ -1,6 +1,6 @@
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
-import 'semantic-ui-css/semantic.min.css'
+// import 'semantic-ui-css/semantic.min.css'
 
 import { GET_ALL_CHARACTERS } from './queries';
 import { useQuery } from "@apollo/client";
