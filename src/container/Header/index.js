@@ -12,8 +12,8 @@ function Header() {
         </Row>
         <Row>
             <Col className="input-group input-group-lg input__size">
-                <span className="search input-group-text bg-white" id="inputGroup-sizing-lg"><FontAwesomeIcon className="p-2 text-warning fa-sm" icon={faSearch}/></span>
-                <input type="text" className="form-control fs-6" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Name, description, location …"/>
+                <span className="search input-group-text bg-white border-0" id="inputGroup-sizing-lg"><FontAwesomeIcon className="p-2 text-warning fa-sm" icon={faSearch}/></span>
+                <input type="text" className="form-control fs-6 bg-white border-0" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Name, description, location …"/>
             </Col>
         </Row>
     </Container>

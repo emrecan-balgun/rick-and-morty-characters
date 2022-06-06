@@ -28,13 +28,6 @@
   cursor: pointer;
 }
 
-.deneme {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
 .zeroPadding {
   padding: 0 !important;
 }
