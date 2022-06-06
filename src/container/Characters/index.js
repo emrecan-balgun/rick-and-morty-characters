@@ -52,7 +52,7 @@ function Characters() {
   };
 
   return (
-    <Container>
+    <Container fluid>
       <Row>
         <Col className="perPageFilter">
           <div className="custom-select">
@@ -64,7 +64,7 @@ function Characters() {
             </select>
           </div>
         </Col>
-        <hr className="my-4" />
+        <hr className="my-3" />
           {
                 data.characters.results.slice(0,perPage).map((character) => (
                   <Col className="col-3" key={character.id}>
