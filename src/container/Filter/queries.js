@@ -19,3 +19,13 @@ export const GET_ALL_SPECIES = gql`
     }
     }
 `;
+
+export const GET_ALL_LOCATIONS = gql`
+    query getAllLocations {
+    locations {
+        results {
+        name
+        }
+    }
+    }
+`;
