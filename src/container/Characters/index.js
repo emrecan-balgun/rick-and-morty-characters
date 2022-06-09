@@ -80,7 +80,7 @@ function Characters() {
                 ))
             }
         <Col className="col-12 mt-4 mb-4">
-            <Pagination defaultActivePage={1} activePage={active} totalPages={42} onPageChange={(event, data) => handlePageClick(data.activePage)}/>
+            <Pagination activePage={active} totalPages={42} onPageChange={(event, data) => handlePageClick(data.activePage)}/>
         </Col>
       </Row>
     </Container>

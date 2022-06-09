@@ -4,7 +4,8 @@ export const GET_ALL_GENDERS = gql`
     query getAllGenders {
     characters {
         results {
-        gender
+            id
+            gender
         }
     }
     }
@@ -14,7 +15,8 @@ export const GET_ALL_SPECIES = gql`
     query getAllSpecies {
     characters{
         results{
-        species
+            id
+            species
         }
     }
     }
@@ -24,7 +26,8 @@ export const GET_ALL_LOCATIONS = gql`
     query getAllLocations {
     locations {
         results {
-        name
+            id
+            name
         }
     }
     }
