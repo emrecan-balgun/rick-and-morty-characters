@@ -9,3 +9,13 @@ export const GET_ALL_GENDERS = gql`
     }
     }
 `;
+
+export const GET_ALL_SPECIES = gql`
+    query getAllSpecies {
+    characters{
+        results{
+        species
+        }
+    }
+    }
+`;
