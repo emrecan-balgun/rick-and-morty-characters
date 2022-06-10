@@ -12,8 +12,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { changePageNumber, pageNumber, changePerPage, perPage } from '../../app/rickAndMortySlice';
 
 function Characters() {
-  // const [pageNumber, setPageNumber] = useState(1);
-  // const [perPage, setPerPage] = useState(8);
   const [active, setActive] = useState(1);
   // const [state, setState] = useState([]);
 

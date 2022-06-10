@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { pageNumber } from '../../app/rickAndMortySlice';
+import { pageNumber, perPage } from '../../app/rickAndMortySlice';
 import { GET_GENDERS_BY_PAGE } from './queries';
 import { useQuery } from "@apollo/client";
 import { Col, Badge } from 'react-bootstrap';
@@ -12,6 +12,7 @@ import { nanoid } from 'nanoid';
 
 function Gender() {
     const pageNum = useSelector(pageNumber);
+    const perPages = useSelector(perPage);
     let gendersArray = [];
 
     const { loading, error, data } = useQuery(GET_GENDERS_BY_PAGE, {
@@ -38,7 +39,7 @@ function Gender() {
         return <Loading />;
     }
 
-    for(const gender of data.characters.results) {
+    for(const gender of data.characters.results.slice(0,perPages)) {
         if(!gendersArray.includes(gender.gender)) {
             gendersArray.push(gender.gender);
         }
@@ -50,7 +51,7 @@ function Gender() {
     gendersCountArray.push(0);
     }
 
-    for(let i = 0; i < data.characters.results.length; i++) {
+    for(let i = 0; i < perPages; i++) {
         for(let j = 0; j < gendersArray.length; j++) {
             if(data.characters.results[i].gender == gendersArray[j]) {
             gendersCountArray[j] += 1;
