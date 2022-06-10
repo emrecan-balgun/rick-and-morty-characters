@@ -22,13 +22,13 @@ query getAllSpeciesByPage($page: Int!){
     }
 `;
 
-export const GET_ALL_LOCATIONS = gql`
-    query getAllLocations {
-    locations {
-        results {
-            id
-            name
+export const GET_LOCATIONS_BY_PAGE = gql`
+query getAllLocationsByPage($page: Int!) {
+        locations(page: $page) {
+            results {
+                id
+                name
+            }
         }
-    }
     }
 `;
