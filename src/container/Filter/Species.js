@@ -59,9 +59,9 @@ function Species() {
     <Col className="text-start py-3">
           <span className="filtersTitle">species</span>
           {
-              speciesArray.map((character, idx) => (
+              speciesArray.map((species, idx) => (
                  <label className="checkContainer" key={nanoid()}>
-                    {character}
+                    {species}
                     <input type="checkbox"/>
                     <Badge bg="light" text="dark">{speciesCountArray[idx]}</Badge>
                     <span className="checkmark"></span>

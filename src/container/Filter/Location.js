@@ -59,9 +59,9 @@ function Location() {
     <Col className="text-start py-3">
           <span className="filtersTitle">location</span>
           {
-              locationsArray.map((character, idx) => (
+              locationsArray.map((location, idx) => (
                  <label className="checkContainer" key={nanoid()}>
-                    {character}
+                    {location}
                     <input type="checkbox"/>
                     <Badge bg="light" text="dark">{locationsCountArray[idx]}</Badge>
                     <span className="checkmark"></span>
