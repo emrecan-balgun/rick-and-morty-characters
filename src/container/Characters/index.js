@@ -8,15 +8,21 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { Pagination } from 'semantic-ui-react'
 
+import { useSelector, useDispatch } from 'react-redux';
+import { changePageNumber, pageNumber } from '../../app/rickAndMortySlice';
+
 function Characters() {
-  const [pageNumber, setPageNumber] = useState(1);
+  // const [pageNumber, setPageNumber] = useState(1);
   const [perPage, setPerPage] = useState(8);
   const [active, setActive] = useState(1);
   // const [state, setState] = useState([]);
 
+  const dispatch = useDispatch();
+  const pageNum = useSelector(pageNumber);
+
   const { loading, error, data } = useQuery(GET_ALL_CHARACTERS, {
     variables: {
-        page: pageNumber,
+        page: pageNum,
     },
   });
 
@@ -24,7 +30,7 @@ function Characters() {
     // if (data) {
     //   setState(data)
     // }
-  }, [pageNumber]);
+  }, [pageNum]);
  
   const options = [
     '8 hits per page', 
@@ -48,7 +54,8 @@ function Characters() {
   const handlePageClick = (number) => {
     console.log(number);
     setActive(number);
-    setPageNumber(number);
+    // setPageNumber(number);
+    dispatch(changePageNumber(number));
   };
 
   return (
