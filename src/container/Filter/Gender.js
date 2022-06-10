@@ -57,7 +57,7 @@ function Gender() {
             gendersCountArray[j] += 1;
             }
         }
-        }
+    }
   return (
     <Col className="text-start py-3">
           <span className="filtersTitle">gender</span>
