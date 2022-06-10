@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { pageNumber, perPage } from '../../app/rickAndMortySlice';
 import { GET_GENDERS_BY_PAGE } from './queries';
@@ -59,7 +59,7 @@ function Gender() {
         }
         }
   return (
-    <Col className="text-start">
+    <Col className="text-start py-3">
           <span className="filtersTitle">gender</span>
           {
               gendersArray.map((character, idx) => (

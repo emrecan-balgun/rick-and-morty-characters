@@ -1,5 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import Gender from './Gender';
+import Species from './Species';
 
 function Filter() {
   return (
@@ -13,6 +14,8 @@ function Filter() {
         </Col>
         <hr className="my-3"/>
         <Gender />
+        <hr className="my-3"/>
+        <Species />
       </Row>
     </Container>
   )
