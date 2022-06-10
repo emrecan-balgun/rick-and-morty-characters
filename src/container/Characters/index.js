@@ -9,16 +9,17 @@ import { useState, useEffect } from 'react';
 import { Pagination } from 'semantic-ui-react'
 
 import { useSelector, useDispatch } from 'react-redux';
-import { changePageNumber, pageNumber } from '../../app/rickAndMortySlice';
+import { changePageNumber, pageNumber, changePerPage, perPage } from '../../app/rickAndMortySlice';
 
 function Characters() {
   // const [pageNumber, setPageNumber] = useState(1);
-  const [perPage, setPerPage] = useState(8);
+  // const [perPage, setPerPage] = useState(8);
   const [active, setActive] = useState(1);
   // const [state, setState] = useState([]);
 
   const dispatch = useDispatch();
   const pageNum = useSelector(pageNumber);
+  const perPages = useSelector(perPage);
 
   const { loading, error, data } = useQuery(GET_ALL_CHARACTERS, {
     variables: {
@@ -48,7 +49,8 @@ function Characters() {
   }
 
   const handlePerPage = (event) => {
-    setPerPage(event.target.value);
+    // setPerPage(event.target.value);
+    dispatch(changePerPage(event.target.value));
   }
 
   const handlePageClick = (number) => {
@@ -63,7 +65,7 @@ function Characters() {
       <Row>
         <Col className="perPageFilter">
           <div className="custom-select">
-            <select className="select" value={perPage} onChange={(e) => handlePerPage(e)}>
+            <select className="select" value={perPages} onChange={(e) => handlePerPage(e)}>
               <option className="option" value={options[0].substring(0,1)}>{options[0]}</option>
               <option className="option" value={options[1].substring(0,2)}>{options[1]}</option>
               <option className="option" value={options[2].substring(0,2)}>{options[2]}</option>
@@ -73,7 +75,7 @@ function Characters() {
         </Col>
         <hr className="my-3" />
           {
-                data.characters.results.slice(0,perPage).map((character) => (
+                data.characters.results.slice(0,perPages).map((character) => (
                   <Col className="col-3" key={character.id}>
                     <Card className="border-0 p-2">
                       <Card.Img variant="top" src={character.image}/>
