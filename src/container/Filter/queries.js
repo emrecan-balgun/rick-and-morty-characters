@@ -11,6 +11,17 @@ export const GET_ALL_GENDERS = gql`
     }
 `;
 
+export const GET_GENDERS_BY_PAGE = gql`
+query getAllGendersByPage($page: Int!){
+        characters(page: $page){
+            results{
+                id
+                gender
+            }
+        }                           
+    }
+`;
+
 export const GET_ALL_SPECIES = gql`
     query getAllSpecies {
     characters{
