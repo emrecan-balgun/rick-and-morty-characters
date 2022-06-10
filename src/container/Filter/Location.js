@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { pageNumber, perPage } from '../../app/rickAndMortySlice';
-import { GET_SPECIES_BY_PAGE } from './queries';
+import { GET_LOCATIONS_BY_PAGE } from './queries';
 import { useQuery } from "@apollo/client";
 import { Col, Badge } from 'react-bootstrap';
 
@@ -13,9 +13,9 @@ import { nanoid } from 'nanoid';
 function Location() {
     const pageNum = useSelector(pageNumber);
     const perPages = useSelector(perPage);
-    let speciesArray = [];
+    let locationsArray = [];
 
-    const { loading, error, data } = useQuery(GET_SPECIES_BY_PAGE, {
+    const { loading, error, data } = useQuery(GET_LOCATIONS_BY_PAGE, {
         variables: {
             page: pageNum,
         },
@@ -35,35 +35,35 @@ function Location() {
         return <Loading />;
     }
 
-    for(const species of data.characters.results.slice(0,perPages)) {
-        if(!speciesArray.includes(species.species)) {
-            speciesArray.push(species.species);
+    for(const location of data.locations.results.slice(0,perPages)) {
+        if(!locationsArray.includes(location.name)) {
+            locationsArray.push(location.name);
         }
     }
 
-    let speciesCountArray = [];
+    let locationsCountArray = [];
 
-    for(let k = 0; k < speciesArray.length; k++) {
-        speciesCountArray.push(0);
+    for(let k = 0; k < locationsArray.length; k++) {
+        locationsCountArray.push(0);
     }
 
     for(let i = 0; i < perPages; i++) {
-        for(let j = 0; j < speciesArray.length; j++) {
-            if(data.characters.results[i].species == speciesArray[j]) {
-                speciesCountArray[j] += 1;
+        for(let j = 0; j < locationsArray.length; j++) {
+            if(data.locations.results[i].name == locationsArray[j]) {
+                locationsCountArray[j] += 1;
             }
         }
     }
 
   return (
     <Col className="text-start py-3">
-          <span className="filtersTitle">species</span>
+          <span className="filtersTitle">location</span>
           {
-              speciesArray.map((character, idx) => (
+              locationsArray.map((character, idx) => (
                  <label className="checkContainer" key={nanoid()}>
                     {character}
                     <input type="checkbox"/>
-                    <Badge bg="light" text="dark">{speciesCountArray[idx]}</Badge>
+                    <Badge bg="light" text="dark">{locationsCountArray[idx]}</Badge>
                     <span className="checkmark"></span>
                   </label>
               ))
