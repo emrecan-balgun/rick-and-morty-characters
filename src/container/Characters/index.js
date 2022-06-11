@@ -56,25 +56,27 @@ function Characters() {
     dispatch(changePageNumber(number));
   };
 
-  const filteredData = data.characters.results && data.characters.results.filter(item =>
+  const filteredData = data.characters.results.slice(0, perPages) && data.characters.results.slice(0, perPages).filter(item =>
     item.name.toLowerCase().includes(searchInput.toLowerCase()) ||
     item.species.toLowerCase().includes(searchInput.toLowerCase()) ||
     item.location.name.toLowerCase().includes(searchInput.toLowerCase())
   )
 
-  // const filterGenderCharacters = filteredData.slice(0,perPages).filter(item => valueOfGenders?.includes(item.gender))
-  const filterSpeciesCharacters = filteredData.slice(0,perPages).filter(item => valueOfSpecies?.includes(item.species))
+  const filterGenderCharacters = data.characters.results.slice(0, perPages).filter(item => valueOfGenders.includes(item.gender))
+  const filterSpeciesCharacters = data.characters.results.slice(0,perPages).filter(item => valueOfSpecies.includes(item.species))
   const filterLocations = filteredData.slice(0,perPages).filter(item => valueOfLocations.includes(item.location.name))
 
-  // console.log(filterGenderChacters);
-  // console.log(filterSpeciesChacters);
+  // console.log(filterGenderCharacters);
+  // console.log(filterSpeciesCharacters);
   // console.log(filterLocations);
 
-  const displayCharacters =  filterLocations.length !== 0  // || filterSpeciesCharacters.length !== 0
-  ? filterLocations.slice(0, perPages) // && filterSpeciesCharacters.slice(0, perPages)
+  const displayCharacters =  filterLocations.length !== 0 || filterSpeciesCharacters !== 0
+  ? filterSpeciesCharacters.slice(0, perPages) && filterLocations.slice(0, perPages) 
   : filteredData.slice(0, perPages)
 
-  // console.log(displayCharacters);
+  const displayCharacters2 = filterGenderCharacters.length !== 0 
+  ? filterGenderCharacters.slice(0, perPages) 
+  : filteredData.slice(0, perPages)
 
   return (
     <Container fluid>
@@ -91,8 +93,8 @@ function Characters() {
         </Col>
         <hr className="my-3" />
           {
-            searchInput.length > 0 
-            ? filteredData.slice(0,perPages).map((character) => (
+            displayCharacters.length !== 0
+            ? displayCharacters.slice(0,perPages).map((character) => (
               <Col className="col-3" key={character.id}>
                     <Card className="border-0 p-2">
                       <Card.Img variant="top" src={character.image}/>
@@ -104,7 +106,7 @@ function Characters() {
                     </Card>
                   </Col>
             ))
-            : displayCharacters.slice(0,perPages).map((character) => (
+            : displayCharacters2.slice(0,perPages).map((character) => (
                   <Col className="col-3" key={character.id}>
                     <Card className="border-0 p-2">
                       <Card.Img variant="top" src={character.image}/>

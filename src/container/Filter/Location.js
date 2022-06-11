@@ -42,8 +42,6 @@ function Location() {
         }
     }
 
-    console.log(locationsArray);
-
     let locationsCountArray = [];
 
     for(let k = 0; k < locationsArray.length; k++) {
