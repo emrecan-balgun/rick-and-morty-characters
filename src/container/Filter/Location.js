@@ -36,11 +36,13 @@ function Location() {
         return <Loading />;
     }
 
-    for(const location of data.locations.results.slice(0,perPages)) {
-        if(!locationsArray.includes(location.name)) {
-            locationsArray.push(location.name);
+    for(const location of data.characters.results.slice(0,perPages)) {
+        if(!locationsArray.includes(location.location.name)) {
+            locationsArray.push(location.location.name);
         }
     }
+
+    console.log(locationsArray);
 
     let locationsCountArray = [];
 
@@ -50,7 +52,7 @@ function Location() {
 
     for(let i = 0; i < perPages; i++) {
         for(let j = 0; j < locationsArray.length; j++) {
-            if(data.locations.results[i].name == locationsArray[j]) {
+            if(data.characters.results[i].location.name == locationsArray[j]) {
                 locationsCountArray[j] += 1;
             }
         }

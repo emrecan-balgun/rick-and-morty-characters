@@ -1,6 +1,5 @@
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
-// import 'semantic-ui-css/semantic.min.css'
 
 import { GET_ALL_CHARACTERS } from './queries';
 import { useQuery } from "@apollo/client";
@@ -9,16 +8,19 @@ import { useState, useEffect } from 'react';
 import { Pagination } from 'semantic-ui-react'
 
 import { useSelector, useDispatch } from 'react-redux';
-import { changePageNumber, pageNumber, changePerPage, perPage, searchValue } from '../../app/rickAndMortySlice';
+import { changePageNumber, pageNumber, changePerPage, perPage, searchValue, genderValue, locationValue, speciesValue } from '../../app/rickAndMortySlice';
 
 function Characters() {
-  const [active, setActive] = useState(1);
-  // const [state, setState] = useState([]);
-
   const dispatch = useDispatch();
+
+  const [active, setActive] = useState(1);
+
   const pageNum = useSelector(pageNumber);
   const perPages = useSelector(perPage);
   const searchInput = useSelector(searchValue);
+  const valueOfGenders = useSelector(genderValue);
+  const valueOfLocations = useSelector(locationValue);
+  const valueOfSpecies = useSelector(speciesValue);
 
   const { loading, error, data } = useQuery(GET_ALL_CHARACTERS, {
     variables: {
@@ -27,9 +29,7 @@ function Characters() {
   });
 
   useEffect(() => {
-    // if (data) {
-    //   setState(data)
-    // }
+
   }, [pageNum]);
  
   const options = [
@@ -48,14 +48,11 @@ function Characters() {
   }
 
   const handlePerPage = (event) => {
-    // setPerPage(event.target.value);
     dispatch(changePerPage(event.target.value));
   }
 
   const handlePageClick = (number) => {
-    console.log(number);
     setActive(number);
-    // setPageNumber(number);
     dispatch(changePageNumber(number));
   };
 
@@ -64,6 +61,20 @@ function Characters() {
     item.species.toLowerCase().includes(searchInput.toLowerCase()) ||
     item.location.name.toLowerCase().includes(searchInput.toLowerCase())
   )
+
+  // const filterGenderCharacters = filteredData.slice(0,perPages).filter(item => valueOfGenders?.includes(item.gender))
+  const filterSpeciesCharacters = filteredData.slice(0,perPages).filter(item => valueOfSpecies?.includes(item.species))
+  const filterLocations = filteredData.slice(0,perPages).filter(item => valueOfLocations.includes(item.location.name))
+
+  // console.log(filterGenderChacters);
+  // console.log(filterSpeciesChacters);
+  // console.log(filterLocations);
+
+  const displayCharacters =  filterLocations.length !== 0  // || filterSpeciesCharacters.length !== 0
+  ? filterLocations.slice(0, perPages) // && filterSpeciesCharacters.slice(0, perPages)
+  : filteredData.slice(0, perPages)
+
+  // console.log(displayCharacters);
 
   return (
     <Container fluid>
@@ -93,7 +104,7 @@ function Characters() {
                     </Card>
                   </Col>
             ))
-            : data.characters.results.slice(0,perPages).map((character) => (
+            : displayCharacters.slice(0,perPages).map((character) => (
                   <Col className="col-3" key={character.id}>
                     <Card className="border-0 p-2">
                       <Card.Img variant="top" src={character.image}/>
