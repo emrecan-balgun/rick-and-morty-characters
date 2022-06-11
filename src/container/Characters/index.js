@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 import { Pagination } from 'semantic-ui-react'
 
 import { useSelector, useDispatch } from 'react-redux';
-import { changePageNumber, pageNumber, changePerPage, perPage } from '../../app/rickAndMortySlice';
+import { changePageNumber, pageNumber, changePerPage, perPage, searchValue } from '../../app/rickAndMortySlice';
 
 function Characters() {
   const [active, setActive] = useState(1);
@@ -18,6 +18,7 @@ function Characters() {
   const dispatch = useDispatch();
   const pageNum = useSelector(pageNumber);
   const perPages = useSelector(perPage);
+  const searchInput = useSelector(searchValue);
 
   const { loading, error, data } = useQuery(GET_ALL_CHARACTERS, {
     variables: {
@@ -58,6 +59,12 @@ function Characters() {
     dispatch(changePageNumber(number));
   };
 
+  const filteredData = data.characters.results && data.characters.results.filter(item =>
+    item.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+    item.species.toLowerCase().includes(searchInput.toLowerCase()) ||
+    item.location.name.toLowerCase().includes(searchInput.toLowerCase())
+  )
+
   return (
     <Container fluid>
       <Row>
@@ -73,7 +80,20 @@ function Characters() {
         </Col>
         <hr className="my-3" />
           {
-                data.characters.results.slice(0,perPages).map((character) => (
+            searchInput.length > 0 
+            ? filteredData.slice(0,perPages).map((character) => (
+              <Col className="col-3" key={character.id}>
+                    <Card className="border-0 p-2">
+                      <Card.Img variant="top" src={character.image}/>
+                      <Card.Body className="text-start zeroPadding ">
+                        <Card.Text className="characterCategory">{character.species}</Card.Text>
+                        <Card.Text className="characterName fw-bold">{character.name}</Card.Text>
+                        <Card.Text className="characterLocation">{character.location.name}</Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+            ))
+            : data.characters.results.slice(0,perPages).map((character) => (
                   <Col className="col-3" key={character.id}>
                     <Card className="border-0 p-2">
                       <Card.Img variant="top" src={character.image}/>
@@ -86,9 +106,13 @@ function Characters() {
                   </Col>
                 ))
             }
-        <Col className="col-12 mt-4 mb-4">
-            <Pagination activePage={active} totalPages={42} onPageChange={(event, data) => handlePageClick(data.activePage)}/>
-        </Col>
+            {
+              searchInput.length > 0 
+              ? ''
+              :  <Col className="col-12 mt-4 mb-4">
+                <Pagination activePage={active} totalPages={42} onPageChange={(event, data) => handlePageClick(data.activePage)}/>
+              </Col>
+            }
       </Row>
     </Container>
   )
