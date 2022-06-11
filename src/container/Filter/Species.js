@@ -62,7 +62,7 @@ function Species() {
               speciesArray.map((species, idx) => (
                  <label className="checkContainer" key={nanoid()}>
                     {species}
-                    <input type="checkbox"/>
+                    <input type="checkbox" value={species} onChange={(e) => e.target.checked ? '' : ''}/>
                     <Badge bg="light" text="dark">{speciesCountArray[idx]}</Badge>
                     <span className="checkmark"></span>
                   </label>

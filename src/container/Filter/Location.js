@@ -62,7 +62,7 @@ function Location() {
               locationsArray.map((location, idx) => (
                  <label className="checkContainer" key={nanoid()}>
                     {location}
-                    <input type="checkbox"/>
+                    <input type="checkbox" value={location} onChange={(e) => e.target.checked ? '' : ''}/>
                     <Badge bg="light" text="dark">{locationsCountArray[idx]}</Badge>
                     <span className="checkmark"></span>
                   </label>

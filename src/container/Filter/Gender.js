@@ -62,10 +62,10 @@ function Gender() {
     <Col className="text-start py-3">
           <span className="filtersTitle">gender</span>
           {
-              gendersArray.map((character, idx) => (
+              gendersArray.map((gender, idx) => (
                  <label className="checkContainer" key={nanoid()}>
-                    {character}
-                    <input type="checkbox"/>
+                    {gender}
+                    <input type="checkbox" value={gender} onChange={(e) => e.target.checked ? '' : ''} />
                     <Badge bg="light" text="dark">{gendersCountArray[idx]}</Badge>
                     <span className="checkmark"></span>
                   </label>
