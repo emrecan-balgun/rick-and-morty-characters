@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import { changeChecked, pageNumber, perPage } from '../../app/rickAndMortySlice';
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux';
+import { pageNumber, perPage } from '../../app/rickAndMortySlice';
 import { GET_LOCATIONS_BY_PAGE } from './queries';
 import { useQuery } from "@apollo/client";
 import { Col, Badge } from 'react-bootstrap';
@@ -11,10 +11,8 @@ import Error from '../../components/Error';
 import { nanoid } from 'nanoid';
 
 function Location() {
-    const dispatch = useDispatch();
     const pageNum = useSelector(pageNumber);
     const perPages = useSelector(perPage);
-    // const checkControl = useSelector(checked);
     let locationsArray = [];
 
     const { loading, error, data } = useQuery(GET_LOCATIONS_BY_PAGE, {
@@ -22,7 +20,6 @@ function Location() {
             page: pageNum,
         },
     });
-
  
     useEffect(() => {
         // if (data) {
@@ -58,21 +55,14 @@ function Location() {
         }
     }
 
-    function deneme(event) {
-        // console.log("click: ", event);
-        dispatch(changeChecked(event));
-    }
-
   return (
     <Col className="text-start py-3">
           <span className="filtersTitle">location</span>
           {
               locationsArray.map((location, idx) => (
-                // Label'a key verildiği zaman checkBox da double click problemi ortaya çıkıyor
-                // Şu an için console da key hatası mevcut, ilerleyen zamanda düzelteceğim
-                 <label className="checkContainer">
+                 <label className="checkContainer" key={nanoid()}>
                     {location}
-                    <input type="checkbox" onChange={(e) => deneme(e.target.checked)}/>
+                    <input type="checkbox"/>
                     <Badge bg="light" text="dark">{locationsCountArray[idx]}</Badge>
                     <span className="checkmark"></span>
                   </label>
