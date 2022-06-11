@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux';
-import { pageNumber, perPage } from '../../app/rickAndMortySlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { pageNumber, perPage, addLocationValue, removeLocationValue } from '../../app/rickAndMortySlice';
 import { GET_LOCATIONS_BY_PAGE } from './queries';
 import { useQuery } from "@apollo/client";
 import { Col, Badge } from 'react-bootstrap';
@@ -9,9 +9,6 @@ import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 
 import { nanoid } from 'nanoid';
-
-import { useDispatch } from 'react-redux';
-import { addLocationValue, removeLocationValue } from '../../app/rickAndMortySlice';
 
 function Location() {
     const dispatch = useDispatch();
