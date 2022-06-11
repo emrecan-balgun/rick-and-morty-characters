@@ -13,7 +13,7 @@ function Header() {
         <Row>
             <Col className="input-group input-group-lg input__size">
                 <span className="search input-group-text bg-white border-0" id="inputGroup-sizing-lg"><FontAwesomeIcon className="p-2 text-warning fa-sm" icon={faSearch}/></span>
-                <input type="text" className="form-control fs-6 bg-white border-0" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Name, description, location …"/>
+                <input type="text" onChange={(e) => console.log(e.target.value)} className="form-control fs-6 bg-white border-0" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Name, description, location …"/>
             </Col>
         </Row>
     </Container>
