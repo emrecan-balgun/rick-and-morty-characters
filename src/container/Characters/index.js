@@ -56,6 +56,11 @@ function Characters() {
     dispatch(changePageNumber(number));
   };
 
+  // Filtrelemede bazı hatalar var sadece location aktif olarak çalışıyor
+  // Gender filtreleme komple sorunlu
+  // Species ise  location ile çakışıyor, sadece bir tanesini çalıştırabiliyorum
+  // İleride tekrardan göz atacağım
+
   const filteredData = data.characters.results.slice(0, perPages) && data.characters.results.slice(0, perPages).filter(item =>
     item.name.toLowerCase().includes(searchInput.toLowerCase()) ||
     item.species.toLowerCase().includes(searchInput.toLowerCase()) ||
