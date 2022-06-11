@@ -10,7 +10,11 @@ import Error from '../../components/Error';
 
 import { nanoid } from 'nanoid';
 
+import { useDispatch } from 'react-redux';
+import { addSpeciesValue, removeSpeciesValue } from '../../app/rickAndMortySlice';
+
 function Species() {
+    const dispatch = useDispatch();
     const pageNum = useSelector(pageNumber);
     const perPages = useSelector(perPage);
     let speciesArray = [];
@@ -62,7 +66,7 @@ function Species() {
               speciesArray.map((species, idx) => (
                  <label className="checkContainer" key={nanoid()}>
                     {species}
-                    <input type="checkbox" value={species} onChange={(e) => e.target.checked ? '' : ''}/>
+                    <input type="checkbox" value={species} onChange={(e) => e.target.checked ? dispatch(addSpeciesValue(e.target.value)) : dispatch(removeSpeciesValue(e.target.value))}/>
                     <Badge bg="light" text="dark">{speciesCountArray[idx]}</Badge>
                     <span className="checkmark"></span>
                   </label>

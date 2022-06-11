@@ -10,7 +10,12 @@ import Error from '../../components/Error';
 
 import { nanoid } from 'nanoid';
 
+import { useDispatch } from 'react-redux';
+import { addGenderValue, removeGenderValue } from '../../app/rickAndMortySlice';
+
+
 function Gender() {
+    const dispatch = useDispatch();
     const pageNum = useSelector(pageNumber);
     const perPages = useSelector(perPage);
     let gendersArray = [];
@@ -65,7 +70,7 @@ function Gender() {
               gendersArray.map((gender, idx) => (
                  <label className="checkContainer" key={nanoid()}>
                     {gender}
-                    <input type="checkbox" value={gender} onChange={(e) => e.target.checked ? '' : ''} />
+                    <input type="checkbox" value={gender} onChange={(e) => e.target.checked ? dispatch(addGenderValue(e.target.value)) : dispatch(removeGenderValue(e.target.value))} />
                     <Badge bg="light" text="dark">{gendersCountArray[idx]}</Badge>
                     <span className="checkmark"></span>
                   </label>

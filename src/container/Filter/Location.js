@@ -10,7 +10,11 @@ import Error from '../../components/Error';
 
 import { nanoid } from 'nanoid';
 
+import { useDispatch } from 'react-redux';
+import { addLocationValue, removeLocationValue } from '../../app/rickAndMortySlice';
+
 function Location() {
+    const dispatch = useDispatch();
     const pageNum = useSelector(pageNumber);
     const perPages = useSelector(perPage);
     let locationsArray = [];
@@ -62,7 +66,7 @@ function Location() {
               locationsArray.map((location, idx) => (
                  <label className="checkContainer" key={nanoid()}>
                     {location}
-                    <input type="checkbox" value={location} onChange={(e) => e.target.checked ? '' : ''}/>
+                    <input type="checkbox" value={location} onChange={(e) => e.target.checked ? dispatch(addLocationValue(e.target.value)) : dispatch(removeLocationValue(e.target.value))}/>
                     <Badge bg="light" text="dark">{locationsCountArray[idx]}</Badge>
                     <span className="checkmark"></span>
                   </label>
