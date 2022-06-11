@@ -2,15 +2,23 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Gender from './Gender';
 import Species from './Species';
 import Location from './Location';
+import { useSelector } from 'react-redux';
+import { checked } from '../../app/rickAndMortySlice';
 
 function Filter() {
+  function handleClick() {
+    document.querySelectorAll('input[type=checkbox]').forEach( el => el.checked = false );
+  }
+
+  const checkControl = useSelector(checked);
+
   return (
     <Container fluid>
       <Row>
         <Col>
           <div className="filtersHeader">
             <span className="filtersTitle">Filters</span>
-            <button disabled className="border-0 bg-transparent clearFiltersButton buttonDisabled">Clear filters</button>
+            <button disabled={checkControl ? false : true} onClick={handleClick} className="border-0 bg-transparent clearFiltersButton buttonDisabled">Clear filters</button>
           </div>
         </Col>
         <hr className="my-3"/>
