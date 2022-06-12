@@ -1,5 +1,5 @@
 # GraphQL rick and morty characters project within the scope of Patika.dev
-Just client (backend: api)
+Just client (Backend: [API](rickandmortyapi.com/graphql)
 
 # Getting Started with Create React App
 
