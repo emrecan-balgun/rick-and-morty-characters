@@ -1,3 +1,6 @@
+# GraphQL rick and morty characters project within the scope of Patika.dev
+Just client (backend: api)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
