@@ -5,6 +5,9 @@ Just client (Backend: [API](rickandmortyapi.com/graphql))
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Live
+[Link](https://rick-and-morty-characters-henna.vercel.app)
+
 ## Available Scripts
 
 In the project directory, you can run:
